@@ -1,0 +1,19 @@
+.HeroPost {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 100%;
+
+  .HeroImage {
+    height: 25rem;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .title-author {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
