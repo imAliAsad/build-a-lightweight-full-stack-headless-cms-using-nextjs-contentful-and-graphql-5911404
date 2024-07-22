@@ -118,3 +118,48 @@ export async function getPostAndMorePosts(
     morePosts: extractPostEntries(entries),
   };
 }
+
+// menu item queries
+async function fetchGraphQLMenus(query: string, preview = false): Promise<any> {
+  return fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          preview
+            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+            : process.env.CONTENTFUL_ACCESS_TOKEN
+        }`,
+      },
+      body: JSON.stringify({ query }),
+      next: { tags: ["menuItem"] },
+    },
+  ).then((response) => response.json());
+}
+
+const MENU_ITEMS_GRAPHQL_FIELDS = `
+      menuImage {
+        url
+      }
+      description
+      itemName
+`
+
+function extractMenuEntries(fetchResponse: any): any[] {
+  return fetchResponse?.data?.menuItemCollection?.items;
+}
+
+export async function getAllMenuItems(): Promise<any[]> {
+  const entries = await fetchGraphQLMenus(
+    `query {
+      menuItemCollection {
+        items {
+          ${MENU_ITEMS_GRAPHQL_FIELDS}
+        }
+      }
+    }`,
+  );
+  return extractMenuEntries(entries)
+}

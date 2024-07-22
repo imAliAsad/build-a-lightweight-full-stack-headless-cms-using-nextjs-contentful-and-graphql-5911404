@@ -1,7 +1,7 @@
 import { draftMode } from "next/headers";
 import MoreStories from "./more-stories";
 
-import { getAllPosts } from "@/lib/api";
+import { getAllMenuItems, getAllPosts } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
 
 import HeroPost from "./components/HeroPost";
@@ -38,6 +38,10 @@ export default async function Page() {
   const allPosts = await getAllPosts(isEnabled);
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(0);
+
+  const allMenuItems = await getAllMenuItems();
+  const allItems = allMenuItems;
+  console.log(allItems)
 
   return (
     <div className="Page container mx-auto px-5">
