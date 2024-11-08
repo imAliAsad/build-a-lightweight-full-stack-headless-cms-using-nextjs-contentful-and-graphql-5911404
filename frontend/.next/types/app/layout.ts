@@ -1,4 +1,4 @@
-// File: /workspaces/build-a-lightweight-full-stack-headless-cms-using-nextjs-contentful-and-graphql-5911404/.devcontainer/app/layout.tsx
+// File: /workspaces/build-a-lightweight-full-stack-headless-cms-using-nextjs-contentful-and-graphql-5911404/frontend/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
